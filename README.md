@@ -48,7 +48,7 @@ export function RootStore() {
 }
 ```
 
-In the `RootStore` function, we define our application's state. It resembles a React Functional Component and returns a state object that consists of several sub-components. Here, we use the `useState` hook to manage the ids state. The `arrayOfStates` field is dynamically created based on the length of the `ids` state, using the `map` function to generate sub-components of type `StateWithId`.
+In the `RootStore` function, we define our application's state. It resembles a React Functional Component and returns a state object that consists of several sub-components. Here, we use the `useState` hook to manage the `ids` state. The `arrayOfStates` field is dynamically created based on the length of the `ids` state, using the `map` function to generate sub-states of type `StateWithId`. The code of `State1`, `State2` and `StateWithId` is not listed here, but you can imagine they are similar to the `RootStore` - they can use hooks and return some properties and mutation functions.
 
 Now, let's see how you can use the store in your code:
 
@@ -56,20 +56,25 @@ Now, let's see how you can use the store in your code:
 store.getState().setIds([4, 5, 6]);
 ```
 
-Or, if you are within a React component, you can use the `useAppStore` hook to access the state and actions:
+## Using store from React Components
+
+If you are within a React component, you can use the `useAppSelector` hook to access the state and actions:
 
 ```typescript
 function MyComponent() {
-  const { setIds, arrayOfStates } = useAppStore((state) => state);
+  const { setIds, arrayOfStates } = useAppSelector((state) => state);
 
   return (
-    <div>{arrayOfStates.map((state) => <StateComponent key={state.id} state={state} />)}
+    <>
+      <div>
+        { arrayOfStates.map((state) => <StateComponent key={state.id} state={state} />) }
+      </div>
       <button onClick={() => setIds([4, 5, 6])}>Set IDs</button>
-    </div>;
+    </>;
   );
 }
 ```
 
-In the above example, we use the `useAppStore` hook to extract the `setIds` and `arrayOfStates` from the store's state. We can then use them in our component to render the `StateComponent` for each state and update the ids state by clicking the button.
+In the above example, we use the `useAppSelector` hook to extract the `setIds` and `arrayOfStates` from the store's state. We can then use them in our component to render the `StateComponent` for each state and update the ids state by clicking the button.
 
 With Rehoox, managing your application state becomes a breeze, allowing you to focus on building amazing user experiences. Let's continue exploring the powerful features of Rehoox!
