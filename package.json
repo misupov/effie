@@ -1,0 +1,51 @@
+{
+  "name": "react-rehoox",
+  "version": "0.0.1",
+  "description": "State Management via React hooks",
+  "license": "MIT",
+  "author": {
+    "name": "Mikhail Isupov",
+    "email": "lam0x86@gmail.com",
+    "url": "https://github.com/misupov"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "browser": "./dist/index.js",
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "state",
+    "store"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.2.52",
+    "@types/react-is": "^18.2.4",
+    "@types/react-reconciler": "^0.28.8",
+    "react": "^18.2.0",
+    "rollup": "^4.2.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-is": "^18.0.0",
+    "react-reconciler": "^0.29.0"
+  }
+}
