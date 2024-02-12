@@ -4,7 +4,7 @@ import { Store } from "./types";
 const Context = createContext<Store<any> | undefined>(undefined);
 Context.displayName = "Rehoox";
 
-interface UseSelector<StateType = unknown> {
+export interface UseSelector<StateType = unknown> {
   <TState extends StateType = StateType, Selected = unknown>(
     selector: (state: TState) => Selected
   ): Selected;
@@ -39,7 +39,4 @@ export function StoreProvider<TStore extends Store<any>>({
 
 export interface TypedUseSelectorHook<TState> {
   <TSelected>(selector: (state: TState) => TSelected): TSelected;
-  // <Selected = unknown>(
-  //   selector: (state: TState) => Selected,
-  // ): Selected
 }

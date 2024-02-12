@@ -21,9 +21,14 @@ class Container {
   };
 }
 
-export function createStore<T extends State<any>>(
-  stateFunction: () => T
-): Store<T> {
+/**
+ * Create a Rehoox store.
+ * @param stateFunction A function that returns root state.
+ * @returns Rehoox store.
+ */
+export function createStore<TState extends State<any>>(
+  stateFunction: () => TState
+): Store<TState> {
   const root = new Container();
   const container = reconciler.createContainer(
     root,
@@ -38,11 +43,11 @@ export function createStore<T extends State<any>>(
 
   reconciler.updateContainer(from(stateFunction, undefined), container);
 
-  const store: Partial<Store<T>> = {
+  const store: Partial<Store<TState>> = {
     getState() {
       return root.state;
     },
-    useSelector<O>(selector: (state: InferStateType<T>) => O): O {
+    useSelector<O>(selector: (state: InferStateType<TState>) => O): O {
       let prevStateVersion = 0;
       let prevSelection: O;
       return useSyncExternalStore(root.subscribe, () => {
@@ -59,10 +64,10 @@ export function createStore<T extends State<any>>(
 
   store.Provider = (props) => {
     return StoreProvider({
-      store: store as Store<T>,
+      store: store as Store<TState>,
       children: props.children,
     });
   };
 
-  return store as Store<T>;
+  return store as Store<TState>;
 }

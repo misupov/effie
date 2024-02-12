@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from "react";
+import { $stateType } from "./consts";
 
 export type State<TState> = React.ReactNode & { [$stateType]: TState };
 
@@ -13,9 +13,5 @@ export type InferStateType<T> = T extends State<infer S>
 export type Store<T> = {
   getState(): InferStateType<T>;
   useSelector<O>(selector: (state: InferStateType<T>) => O): O;
-  Provider(props: PropsWithChildren): ReactElement;
+  Provider(props: React.PropsWithChildren): React.ReactElement;
 };
-
-export const $name = Symbol("name");
-export const $ = Symbol("$");
-export const $stateType: unique symbol = Symbol('$stateType');

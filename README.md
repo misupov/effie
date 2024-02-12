@@ -10,7 +10,7 @@ However, hooks do come with their limitations.
 
 Firstly, hooks cannot be used outside of the React context. This means you can't use hooks, for example, in Redux's reducers.
 
-Secondly, the order and count of hooks within a single component must remain the same across re-renders. This can be a challenge when you want to create an array of hooks and load multiple resources simultaneously, like with TanStack's useQuery. To work around this limitation, you may resort to a hacky approach of creating a list of invisible components, each invoking useQuery and pushing the query result to a global application state (such as the Redux store) or updating React Context.
+Secondly, the order and count of hooks within a single component must remain the same across re-renders. This can be a challenge when you want to create an array of hooks and load multiple resources simultaneously, using for instance TanStack's useQuery. To work around this limitation, you may resort to a hacky approach of creating a list of invisible components, each invoking useQuery and pushing the query result to a global application state (such as the Redux store) or updating React Context.
 
 Lastly, it's common to need data retrieved from a backend API in multiple places. The naive approach would be to use the useEffect hook every time you need to fetch the data. However, this leads to multiple requests for the same data from multiple components. To share data between components, you can use React Contexts or libraries like React Query, SWR, or Apollo Client. These libraries maintain internal caches and minimize duplicate requests. But personally, I believe in keeping the application state and mutation logic separate from the presentation layer.
 
@@ -27,6 +27,7 @@ import { RootStore } from "./RootStore";
 export const store = createStore(RootStore);
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector = useSelector.withTypes<RootState>();
+export const StoreProvider = store.Provider;
 ```
 
 Here, we import the necessary functions from `"react-rehoox"` and define our store using the `createStore` function. We also define the `RootState` type, which represents the type of our store's state. Additionally, we create a custom hook `useAppSelector` using `useSelector.withTypes<RootState>()` to access the state within our components.
@@ -58,7 +59,14 @@ store.getState().setIds([4, 5, 6]);
 
 ## Using store from React Components
 
-If you are within a React component, you can use the `useAppSelector` hook to access the state and actions:
+First, wrap your application with Rehoox store provider:
+```typescript
+<StoreProvider>
+  <App />
+</StoreProvider>
+```
+
+In a React component, you can use the `useAppSelector` hook to access the state and actions:
 
 ```typescript
 function MyComponent() {

@@ -1,6 +1,6 @@
 import reconciler from "react-reconciler";
 import { DefaultEventPriority } from "react-reconciler/constants";
-import { $ } from "./types";
+import { $ } from "./consts";
 import { clone, stateFiller } from "./iterator";
 
 type SInfo = {
