@@ -3,6 +3,7 @@ import { from } from "./from";
 import reconciler from "./reconciler";
 import { InferStateType, State, Store } from "./types";
 import { StoreProvider } from "./StoreProvider";
+import { ContextProvider } from "./createContextProvider";
 
 class Container {
   version = 0;
@@ -27,7 +28,8 @@ class Container {
  * @returns Rehoox store.
  */
 export function createStore<TState extends State<any>>(
-  stateFunction: () => TState
+  stateFunction: () => TState,
+  contextProvider?: ContextProvider
 ): Store<TState> {
   const root = new Container();
   const container = reconciler.createContainer(
@@ -41,7 +43,14 @@ export function createStore<TState extends State<any>>(
     null
   );
 
-  reconciler.updateContainer(from(stateFunction, undefined), container);
+  if (contextProvider) {
+    reconciler.updateContainer(
+      contextProvider([from(stateFunction)]),
+      container
+    );
+  } else {
+    reconciler.updateContainer(from(stateFunction), container);
+  }
 
   const store: Partial<Store<TState>> = {
     getState() {
