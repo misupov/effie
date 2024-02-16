@@ -23,9 +23,9 @@ class Container {
 }
 
 /**
- * Create a Rehoox store.
+ * Create an Effie store.
  * @param stateFunction A function that returns root state.
- * @returns Rehoox store.
+ * @returns Effie store.
  */
 export function createStore<TState extends State<any>>(
   stateFunction: () => TState,

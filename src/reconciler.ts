@@ -9,22 +9,22 @@ type SInfo = {
   filled?: number;
 };
 
-type RehooxType = "node";
-type RehooxProps = { children: any[]; state: any };
-type RehooxContainer = {
+type EffieType = "node";
+type EffieProps = { children: any[]; state: any };
+type EffieContainer = {
   setState(newState: any): void;
   state: any;
 };
-type RehooxInstance = { [$]?: SInfo };
-type RehooxTextInstance = null;
-type RehooxSuspenseInstance = any;
-type RehooxHydrableInstance = any;
-type RehooxPublicInstance = any;
-type RehooxHostContext = {};
-type RehooxUpdatePayload = any;
-type RehooxChildSet = { newState?: any };
+type EffieInstance = { [$]?: SInfo };
+type EffieTextInstance = null;
+type EffieSuspenseInstance = any;
+type EffieHydrableInstance = any;
+type EffiePublicInstance = any;
+type EffieHostContext = {};
+type EffieUpdatePayload = any;
+type EffieChildSet = { newState?: any };
 
-function createInstanceFromProps(props: RehooxProps) {
+function createInstanceFromProps(props: EffieProps) {
   const result = clone(props.state);
 
   result[$] = {
@@ -36,18 +36,18 @@ function createInstanceFromProps(props: RehooxProps) {
   return result;
 }
 
-const rehooxReconciler = reconciler<
-  RehooxType,
-  RehooxProps,
-  RehooxContainer,
-  RehooxInstance,
-  RehooxTextInstance,
-  RehooxSuspenseInstance,
-  RehooxHydrableInstance,
-  RehooxPublicInstance,
-  RehooxHostContext,
-  RehooxUpdatePayload,
-  RehooxChildSet,
+const effieReconciler = reconciler<
+  EffieType,
+  EffieProps,
+  EffieContainer,
+  EffieInstance,
+  EffieTextInstance,
+  EffieSuspenseInstance,
+  EffieHydrableInstance,
+  EffiePublicInstance,
+  EffieHostContext,
+  EffieUpdatePayload,
+  EffieChildSet,
   number /* TimeoutHandle */,
   -1 /* NoTimeout */
 >({
@@ -168,10 +168,10 @@ const rehooxReconciler = reconciler<
   },
 });
 
-rehooxReconciler.injectIntoDevTools({
+effieReconciler.injectIntoDevTools({
   bundleType: 1,
   version: "0.0.1",
-  rendererPackageName: "react-rehoox",
+  rendererPackageName: "effie",
 });
 
-export default rehooxReconciler;
+export default effieReconciler;

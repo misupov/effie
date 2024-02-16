@@ -2,7 +2,7 @@ import { createContext, createElement, useContext, useState } from "react";
 import { Store } from "./types";
 
 const Context = createContext<Store<any> | undefined>(undefined);
-Context.displayName = "Rehoox";
+Context.displayName = "Effie";
 
 export interface UseSelector<StateType = unknown> {
   <TState extends StateType = StateType, Selected = unknown>(

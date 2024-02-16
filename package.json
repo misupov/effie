@@ -1,5 +1,5 @@
 {
-  "name": "react-rehoox",
+  "name": "effie",
   "version": "0.0.4",
   "description": "State Management via React hooks",
   "license": "MIT",
@@ -8,8 +8,8 @@
     "email": "lam0x86@gmail.com",
     "url": "https://github.com/misupov"
   },
-  "homepage": "https://github.com/misupov/react-rehoox",
-  "repository": "github:misupov/react-rehoox",
+  "homepage": "https://github.com/misupov/effie",
+  "repository": "github:misupov/effie",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
